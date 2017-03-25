@@ -1,3 +1,36 @@
+def mean(data):
+    sum=0.0
+    i=0
+    while i<len(data):
+        sum=sum+data[i]
+        i=i+1
+    a=sum/len(data)
+    return a
+def devi(data):
+    m=mean(data)
+    devdata=[]
+    i=0
+    while i<len(data):
+        devdata.append(data[i]-m)
+        i=i+1
+    return devdata
+def ss(data):
+    de=devi(data)
+    i=0
+    s=[]
+    while i<len(de):
+        s.append(de[i]*de[i])
+        i=i+1
+    sums=0.0
+    p=0
+    while p<len(s):
+        sums=sums+s[p]
+        p=p+1
+    return sums
+def vari(data):
+    sums=ss(data)
+    va=sums/len(data)
+    return va
 def freq(data):
     b={}
     for a in data:
@@ -9,7 +42,7 @@ def freq(data):
     return b
 def firstquatertile(data):
     data0=freq(data)
-    tarea=0
+    tarea=0.0
     for c in data0:
         tarea=tarea+data0[c]
     print tarea
@@ -32,7 +65,7 @@ def firstquatertile(data):
     return fr
 def thirdquatertile(data):
     data0=freq(data)
-    tarea=0
+    tarea=0.0
     for c in data0:
         tarea=tarea+data0[c]
     print tarea
@@ -56,8 +89,7 @@ def thirdquatertile(data):
 def iqr(data):
     delta=thirdquatertile(data)-firstquatertile(data)
     return delta
-data=[3,4,1,7,3,2,6,4,2,1,6,3,4,5,2,5,4,3,4]
-freq(data)
-firstquatertile(data)
-thirdquatertile(data)
-print iqr(data)
+data=[10,20,30,40,50,60,70,80,90]
+print devi(data)
+print ss(data)
+print vari(data)
