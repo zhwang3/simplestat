@@ -1,3 +1,4 @@
+import math
 def mean(data):
     sum=0.0
     i=0
@@ -27,10 +28,28 @@ def ss(data):
         sums=sums+s[p]
         p=p+1
     return sums
-def vari(data):
-    sums=ss(data)
-    va=sums/len(data)
+def vari(data,type):
+    va=0.0
+    if type=="sample":
+        sums = ss(data)
+        va = sums / len(data) - 1
+    elif type=="popu":
+        sums=ss(data)
+        va=sums/len(data)
+    else:
+        print "unexpected variance type"
     return va
+def sd(data,type):
+    sdevi=0.0
+    if type=="sample":
+        v=vari(data,"sample")
+        sdevi=math.sqrt(v)
+    elif type=="popu":
+        v=vari(data,"popu")
+        sdevi=math.sqrt(v)
+    else:
+        print "unexpected sd type"
+    return sdevi
 def freq(data):
     b={}
     for a in data:
@@ -89,7 +108,18 @@ def thirdquatertile(data):
 def iqr(data):
     delta=thirdquatertile(data)-firstquatertile(data)
     return delta
+def zscore(data):
+    m=mean(data)
+    sde=sd(data,"popu")
+    i=0
+    zs=[]
+    while i<len(data):
+        zs.append((data[i]-m)/sde)
+        i=i+1
+    return zs
 data=[10,20,30,40,50,60,70,80,90]
 print devi(data)
 print ss(data)
-print vari(data)
+print vari(data,"popu")
+print sd(data,"popu")
+print zscore(data)
